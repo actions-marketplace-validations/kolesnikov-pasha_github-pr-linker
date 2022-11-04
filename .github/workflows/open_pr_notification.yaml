@@ -15,6 +15,11 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
+    steps:
+      - name: Get event details
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: echo $EVENT_CONTEXT
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Grant execute permission for script
