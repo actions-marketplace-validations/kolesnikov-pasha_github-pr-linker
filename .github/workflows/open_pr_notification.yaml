@@ -1,0 +1,17 @@
+name: Comment PR opened
+
+on:
+  pull_request: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'true'
+    - name: Grant execute permission for script
+      run: chmod +x extract_pr_info_and_comment_open.sh
+    - name: Run script
+      run: ./extract_pr_info_and_comment_open.sh
