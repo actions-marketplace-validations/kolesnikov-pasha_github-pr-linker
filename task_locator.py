@@ -1,12 +1,18 @@
 import os
 from notion_client import Client
-from utils import print_properties, get_task_id, get_page_id, update_link_property
+from notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_open_pr_comment
 
 
 notion = Client(auth=os.environ["NOTION_TOKEN"])
-response = notion.databases.query(database_id="8ad76183848046f2bb81658f92b3a431")
-for result in response["results"]:
-    print(f"----------{get_task_id(result, 'ID')}, {get_page_id(result)}----------")
-    print_properties(result)
-    print()
-    update_link_property(result, "Github PR", None)
+notion_comment = CommentsClient(token=os.environ["NOTION_TOKEN"])
+page = find_page_by_id(notion, "8ad76183848046f2bb81658f92b3a431", "TASKS-1", "ID")
+print_properties(page)
+update_link_property(notion, page, "Github PR", "https://github.com/kolesnikov-pasha/github-pr-linker/pull/1")
+post_open_pr_comment(
+    notion_comment, 
+    page, 
+    "Updated PR comments functionality", 
+    "https://github.com/kolesnikov-pasha/github-pr-linker/pull/1", 
+    "kolesnikov-pasha", 
+    "https://github.com/kolesnikov-pasha"
+)
