@@ -1,7 +1,8 @@
 name: Comment PR opened
 
 on:
-  pull_request: [ "*" ]
+  pull_request: 
+    types: [opened]
 
 jobs:
   build:
