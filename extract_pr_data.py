@@ -2,11 +2,11 @@ import json
 
 def get_pr_data(text=None):
     if text is not None:
-        return json.loads(data)
+        return json.loads(text)
     else:
         with open("example_github_event.json", "r") as f:
             data = "".join(f.readlines())
-    return json.loads(data)
+            return json.loads(data)
 
 
 def get_action(pr_data):
