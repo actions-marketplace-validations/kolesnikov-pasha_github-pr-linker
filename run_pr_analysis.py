@@ -1,4 +1,3 @@
-import os
 from notion_client import Client
 from notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
 import extract_pr_data
