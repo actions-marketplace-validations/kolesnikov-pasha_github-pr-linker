@@ -13,14 +13,12 @@ jobs:
         submodules: 'true'
     - uses: actions/setup-python@v4
       with:
-        python-version: '3.10' 
-    - name: Update envs
+        python-version: '3.10'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run script
       env:
         EVENT_CONTEXT: ${{ toJSON(github.event) }}
         DATABASE_ID: ${{ secrets.DATABASE_ID }}
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      run: echo "Updated successfully"
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run script
-      run: python run_pr_analysis.py
+      run: python run_pr_analysis.py $NOTION_TOKEN $DATABASE_ID TASKS $EVENT_CONTEXT

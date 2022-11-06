@@ -1,16 +1,11 @@
-import os
 import json
 
-IS_TEST = False
-
-
-def get_pr_data():
-    data = ""
-    if IS_TEST:
+def get_pr_data(text=None):
+    if text is not None:
+        return json.loads(data)
+    else:
         with open("example_github_event.json", "r") as f:
             data = "".join(f.readlines())
-    else:
-        data = os.environ["EVENT_CONTEXT"]
     return json.loads(data)
 
 
