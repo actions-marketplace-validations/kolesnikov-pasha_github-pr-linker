@@ -22,5 +22,5 @@ jobs:
         DATABASE_ID: ${{ secrets.DATABASE_ID }}
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       run: |
-        printf '%s\n' "$EVENT_CONTEXT" > foo.json
+        printf '%s\n' "$EVENT_CONTEXT" > event_context.json
         python run_pr_analysis.py $NOTION_TOKEN $DATABASE_ID TASKS event_context.json
