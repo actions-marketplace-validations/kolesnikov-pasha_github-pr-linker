@@ -21,4 +21,6 @@ jobs:
         EVENT_CONTEXT: ${{ toJSON(github.event) }}
         DATABASE_ID: ${{ secrets.DATABASE_ID }}
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      run: python run_pr_analysis.py $NOTION_TOKEN $DATABASE_ID TASKS $EVENT_CONTEXT
+      run: |
+        printf '%s\n' "$EVENT_CONTEXT" > foo.json
+        python run_pr_analysis.py $NOTION_TOKEN $DATABASE_ID TASKS event_context.json

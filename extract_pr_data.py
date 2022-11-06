@@ -1,13 +1,12 @@
 import json
 
-def get_pr_data(text=None):
-    print(text)
-    if text is not None:
-        return json.loads(text)
-    else:
-        with open("example_github_event.json", "r") as f:
-            data = "".join(f.readlines())
-            return json.loads(data)
+def get_pr_data(path=None):
+    print(path)
+    if path is None:
+        path = "example_github_event.json"
+    with open(path, "r") as f:
+        data = "".join(f.readlines())
+        return json.loads(data)
 
 
 def get_action(pr_data):
