@@ -10,7 +10,7 @@ def get_pr_data():
         with open("example_github_event.json", "r") as f:
             data = "".join(f.readlines())
     else:
-        data = os.environ("EVENT_CONTEXT")
+        data = os.environ["EVENT_CONTEXT"]
     return json.loads(data)
 
 

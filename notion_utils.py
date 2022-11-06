@@ -84,10 +84,10 @@ def create_rich_text_url(text, url, annotations={}):
     }
 
 
-def post_open_pr_comment(client: CommentsClient, page, pr_name, pr_url, author_id, author_url):
+def post_pr_comment(client: CommentsClient, page, action: str, pr_name, pr_url, author_id, author_url):
     client.post_comment_on_page(__get_page_id__(page), [
-        create_rich_text_bold("PR "), 
+        create_rich_text_bold(f"{action.capitalize()} PR "), 
         create_rich_text_url(f"\"{pr_name}\"", pr_url, {"underline": True}), 
-        create_rich_text_bold(" opened by "),
+        create_rich_text_bold(" by "),
         create_rich_text_url(f"@{author_id}", author_url)
     ])

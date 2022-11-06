@@ -17,9 +17,10 @@ jobs:
     - name: Get event details
       env:
         EVENT_CONTEXT: ${{ toJSON(github.event) }}
+    - name: Update credentials
+      env: 
+        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Grant execute permission for script
-      run: chmod +x extract_pr_info_and_comment_open.sh
     - name: Run script
-      run: ./extract_pr_info_and_comment_open.sh
+      run: python run_pr_analysis.py
