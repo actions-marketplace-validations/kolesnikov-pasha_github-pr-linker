@@ -1,6 +1,7 @@
 import json
 
 def get_pr_data(text=None):
+    print(text)
     if text is not None:
         return json.loads(text)
     else:
