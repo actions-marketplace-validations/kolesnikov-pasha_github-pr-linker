@@ -1,8 +1,7 @@
 name: Comment PR opened
 
 on:
-  pull_request: 
-    types: [opened, reopened]
+  pull_request
 
 jobs:
   build:
@@ -18,7 +17,6 @@ jobs:
     - name: Get event details
       env:
         EVENT_CONTEXT: ${{ toJSON(github.event) }}
-      run: echo $EVENT_CONTEXT
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Grant execute permission for script
