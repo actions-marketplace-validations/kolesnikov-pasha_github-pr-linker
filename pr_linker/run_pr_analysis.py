@@ -1,6 +1,7 @@
 from notion_client import Client
-from notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
-import extract_pr_data
+from notion_api.notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
+from github_parser import extract_pr_data
+from messages_ui import message_utils
 import re
 import sys
 
@@ -27,9 +28,11 @@ update_link_property(notion, page, "Github PR", pr_url)
 post_pr_comment(
     notion_comment, 
     page, 
-    extract_pr_data.get_action(pr_data),
-    extract_pr_data.get_pr_name(pr_data), 
-    pr_url, 
-    extract_pr_data.get_author_login(pr_data), 
-    extract_pr_data.get_author_url(pr_data)
+    message_utils.get_message(
+        extract_pr_data.get_action(pr_data),
+        extract_pr_data.get_pr_name(pr_data), 
+        pr_url, 
+        extract_pr_data.get_author_login(pr_data), 
+        extract_pr_data.get_author_url(pr_data)
+    )
 )
