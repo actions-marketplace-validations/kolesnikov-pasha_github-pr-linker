@@ -64,7 +64,7 @@ def __build_annotions__(annotations: dict):
 def __create_rich_text__(text: entities.Text):
     return {
         'type': 'text', 
-        'text': {'content': text.text, 'link': None}, 
+        'text': {'content': text.text, 'link': None if text.href is None else {"url": text.href}}, 
         'annotations': __build_annotions__({"bold": text.is_bold}), 
         'plain_text': text.text, 
         'href': text.href
