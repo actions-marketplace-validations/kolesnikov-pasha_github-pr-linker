@@ -1,6 +1,6 @@
 from notion_client import Client
-from notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
-import extract_pr_data
+from notion_api.notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
+from github_parser import extract_pr_data
 import re
 import sys
 

@@ -1,6 +1,7 @@
 from notion_client import Client
 import requests
-import message_utils
+import pr_linker.messages_ui.message_utils as message_utils
+from entities import entities
 
 
 class CommentsClient():
@@ -61,42 +62,22 @@ def __build_annotions__(annotations: dict):
     }
 
 
-def create_rich_text(text, annotations={}):
+def __create_rich_text__(text: entities.Text):
     return {
         'type': 'text', 
-        'text': {'content': text, 'link': None}, 
-        'annotations': __build_annotions__(annotations), 
-        'plain_text': text, 
-        'href': None
+        'text': {'content': text.text, 'link': None}, 
+        'annotations': __build_annotions__({"bold": text.is_bold}), 
+        'plain_text': text.text, 
+        'href': text.href
     }
 
 
-def create_rich_text_bold(text):
-    return create_rich_text(text, {"bold": True})
+def __build_pr_comment__(message):
+    return list(map(__create_rich_text__, message))
 
 
-def create_rich_text_url(text, url, annotations={}):
-    return {
-        'type': 'text', 
-        'text': {'content': text, 'link': {"url": url}}, 
-        'annotations': __build_annotions__(annotations), 
-        'plain_text': text, 
-        'href': url
-    }
-
-
-def __build_pr_comment__(action: str, pr_name, pr_url, author_id, author_url):
-    return [
-        create_rich_text(message_utils.map_action2emoji(action)),
-        create_rich_text_bold(f" {action.capitalize().replace('_', ' ')} PR "), 
-        create_rich_text_url(f"\"{pr_name}\"", pr_url, {"underline": True}), 
-        create_rich_text_bold(" by "),
-        create_rich_text_url(f"@{author_id}", author_url)
-    ]
-
-
-def post_pr_comment(client: CommentsClient, page, action: str, pr_name, pr_url, author_id, author_url):
+def post_pr_comment(client: CommentsClient, page, message):
     client.post_comment_on_page(
         __get_page_id__(page), 
-        __build_pr_comment__(action, pr_name, pr_url, author_id, author_url
-    ))
+        __build_pr_comment__(message)
+    )

@@ -1,0 +1,1 @@
+from messages_ui.tests import test_get_message_pattern
