@@ -1,6 +1,5 @@
 from notion_client import Client
 import requests
-import pr_linker.messages_ui.message_utils as message_utils
 from entities import entities
 
 
