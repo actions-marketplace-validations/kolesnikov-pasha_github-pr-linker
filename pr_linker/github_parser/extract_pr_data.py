@@ -1,4 +1,5 @@
 import json
+from entities import entities
 
 def get_pr_data(path=None):
     print(path)
@@ -10,7 +11,7 @@ def get_pr_data(path=None):
 
 
 def get_action(pr_data):
-    return pr_data["action"]
+    return entities.EventAction(pr_data["action"])
 
 
 def get_author_url(pr_data):
