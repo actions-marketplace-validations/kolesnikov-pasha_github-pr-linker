@@ -1,10 +1,7 @@
 import json
 from entities import entities
 
-def get_pr_data(path=None):
-    print(path)
-    if path is None:
-        path = "example_github_event.json"
+def get_pr_data(path):
     with open(path, "r") as f:
         data = "".join(f.readlines())
         return json.loads(data)
@@ -15,7 +12,7 @@ def get_action(pr_data):
 
 
 def get_author_url(pr_data):
-    return pr_data["sender"]["url"]
+    return pr_data["sender"]["html_url"]
 
 
 def get_author_login(pr_data):
