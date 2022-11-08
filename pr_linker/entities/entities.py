@@ -10,6 +10,7 @@ class EventAction(Enum):
     CONVERTED_TO_DRAFT = "converted_to_draft"
     READY_FOR_REVIEW = "ready_for_review"
     REVIEW_REQUESTED = "review_requested"
+    MERGED = "merged"
 
 
 class Text:
