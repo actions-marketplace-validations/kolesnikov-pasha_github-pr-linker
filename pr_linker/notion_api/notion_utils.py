@@ -1,6 +1,7 @@
 from notion_client import Client
 import requests
 from entities import entities
+import json
 
 
 class CommentsClient():
@@ -20,6 +21,9 @@ class CommentsClient():
         }).content)
 
 
+def __get_database__(client, database_id):
+    return client.databases.query(database_id=database_id)
+
 
 def __get_task_id__(page, task_id_param="ID"):
     properties = page["properties"]
@@ -30,9 +34,14 @@ def __get_page_id__(page):
     return page["id"]
 
 
+def __iterate_through_database_pages__(database):
+    for page in database["results"]:
+        yield page
+
+
 def find_page_by_id(client, database_id, task_id, task_id_param="ID"):
-    database_response = client.databases.query(database_id=database_id)
-    for page in database_response["results"]:
+    database_response = __get_database__(client, database_id)
+    for page in __iterate_through_database_pages__(database_response):
         if __get_task_id__(page, task_id_param) == task_id:
             return page
 
