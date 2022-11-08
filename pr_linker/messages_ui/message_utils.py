@@ -12,7 +12,8 @@ __PR_ACTION_TO_PATTERN__ = {
     entities.EventAction.SYNCRONIZE: ["🔥 Updated pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__], 
     entities.EventAction.CONVERTED_TO_DRAFT: ["📝 Converted pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__, " to draft"], 
     entities.EventAction.READY_FOR_REVIEW: ["👀 Pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__, " is ready for review"], 
-    entities.EventAction.REVIEW_REQUESTED: ["🔎 Review requested for pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__]
+    entities.EventAction.REVIEW_REQUESTED: ["🔎 Review requested for pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__], 
+    entities.EventAction.MERGED: ["✅ Merged pull request \"", __PR_NAME__, "\" by ", __PR_AUTHOR__]
 }
 
 

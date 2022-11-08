@@ -8,7 +8,10 @@ def get_pr_data(path):
 
 
 def get_action(pr_data):
-    return entities.EventAction(pr_data["action"])
+    action = pr_data["action"]
+    if action == "closed" and pr_data["pull_request"]["merged"]:
+        action = "merged"
+    return entities.EventAction(action)
 
 
 def get_author_url(pr_data):

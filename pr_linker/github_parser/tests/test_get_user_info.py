@@ -2,10 +2,12 @@ from github_parser.extract_pr_data import get_author_login, get_author_url, get_
 from entities.entities import EventAction
 
 cases_author = [
-    (get_pr_data("pr_linker/github_parser/tests/example_github_event.json"), "kolesnikov-pasha")
+    (get_pr_data("pr_linker/github_parser/tests/examples/example_github_event_1.json"), "kolesnikov-pasha"),
+    (get_pr_data("pr_linker/github_parser/tests/examples/example_github_event_2.json"), "kolesnikov-pasha")
 ]
 cases_author_url = [
-    (get_pr_data("pr_linker/github_parser/tests/example_github_event.json"), "https://github.com/kolesnikov-pasha")
+    (get_pr_data("pr_linker/github_parser/tests/examples/example_github_event_1.json"), "https://github.com/kolesnikov-pasha"),
+    (get_pr_data("pr_linker/github_parser/tests/examples/example_github_event_2.json"), "https://github.com/kolesnikov-pasha")
 ]
 
 for case in cases_author:
