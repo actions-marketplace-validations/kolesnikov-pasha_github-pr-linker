@@ -21,7 +21,7 @@ class CommentsClient():
         }).content)
 
 
-def __get_database__(client, database_id):
+def get_database(client, database_id):
     return client.databases.query(database_id=database_id)
 
 
@@ -39,9 +39,8 @@ def __iterate_through_database_pages__(database):
         yield page
 
 
-def find_page_by_id(client, database_id, task_id, task_id_param="ID"):
-    database_response = __get_database__(client, database_id)
-    for page in __iterate_through_database_pages__(database_response):
+def find_page_by_id(database, task_id, task_id_param="ID"):
+    for page in __iterate_through_database_pages__(database):
         if __get_task_id__(page, task_id_param) == task_id:
             return page
 

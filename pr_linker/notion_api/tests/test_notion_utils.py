@@ -37,3 +37,7 @@ for i, page in enumerate(notion_utils.__iterate_through_database_pages__(databas
     assert id == IDS[i], f"Failed, expected id = {IDS[i]}, found id = {id}"
     task_id = notion_utils.__get_task_id__(page)
     assert task_id == TASKS_IDS[i], f"Failed, expected task id = {IDS[i]}, found task id = {id}"
+
+for task_id, page_id in zip(TASKS_IDS, IDS):
+    page = notion_utils.find_page_by_id(database, task_id)
+    assert notion_utils.__get_page_id__(page) == page_id, f"Failed finding correct page for task_id = {task_id}" 
