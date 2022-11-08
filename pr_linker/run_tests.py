@@ -1,2 +1,3 @@
 from messages_ui.tests import test_get_message_pattern
 from github_parser.tests import test_get_action, test_get_user_info
+from notion_api.tests import test_notion_utils

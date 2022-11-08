@@ -1,5 +1,5 @@
 from notion_client import Client
-from notion_api.notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment
+from notion_api.notion_utils import find_page_by_id, update_link_property, print_properties, CommentsClient, post_pr_comment, get_database
 from github_parser import extract_pr_data
 from messages_ui import message_utils
 import re
@@ -21,7 +21,7 @@ for part in branch.split("/"):
     if re.match(task_id_pattern, part):
         task_id = part
         break
-page = find_page_by_id(notion, database_id, task_id, "ID")
+page = find_page_by_id(get_database(notion, database_id), task_id, "ID")
 print_properties(page)
 pr_url = extract_pr_data.get_pr_url(pr_data)
 update_link_property(notion, page, "Github PR", pr_url)
