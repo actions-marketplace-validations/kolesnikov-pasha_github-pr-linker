@@ -16,15 +16,14 @@ inputs:
     description: Common prefix of the task ID parameter values.
     default: TASKS
 runs:
-  using: ubuntu-latest
+  using: "composite"
   steps:
   - uses: actions/checkout@v2
   - uses: actions/setup-python@v4
     with:
       python-version: '3.10'
-  - name: Install dependencies
-    run: 
   - name: Run script
+    shell: bash
     env:
       EVENT_CONTEXT: ${{ toJSON(github.event) }}
     run: |
