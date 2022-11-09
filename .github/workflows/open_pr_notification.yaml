@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: action.yaml
+    - uses: ./action.yaml
       with:
         database-id: 8ad76183848046f2bb81658f92b3a431
