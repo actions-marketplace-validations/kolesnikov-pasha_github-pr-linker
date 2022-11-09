@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: ls
-    - uses: ./action.yaml
+    - uses: ./
       with:
         database-id: 8ad76183848046f2bb81658f92b3a431
         notion-token: ${{ secrets.NOTION_TOKEN }}
