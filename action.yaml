@@ -1,0 +1,32 @@
+name: notion-pr-linking
+description: This GitHub Action will connect PRs you make to Notion tasks
+author: kolesnikov-pasha
+branding:
+  icon: external-link
+  color: green
+inputs:
+  database-id:
+    description: ID of a database you want to use as a source of tasks.
+  notion-token:
+    description: API token of your Notion integration.
+  task-id-param:
+    description: Page parameter responsible for representing tasks IDs.
+    default: ID
+  task-id-prefix:
+    description: Common prefix of the task ID parameter values.
+    default: TASKS
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v2
+  - uses: actions/setup-python@v4
+    with:
+      python-version: '3.10'
+  - name: Run script
+    shell: bash
+    env:
+      EVENT_CONTEXT: ${{ toJSON(github.event) }}
+    run: |
+      pip install -r requirements.txt
+      printf '%s\n' "$EVENT_CONTEXT" > github_event_context.json
+      python pr_linker/run_pr_analysis.py ${{ inputs.notion-token }} ${{ inputs.database-id }} ${{ inputs.task-id-prefix }} github_event_context.json
