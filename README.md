@@ -4,7 +4,7 @@
 
 # Update your Notion task with GitHub PR url
 
-Create branch in format `*/{task_id}/{any-description}` and this action will automatically update your Notion task's property with the PR url and comment .
+Create branch in format `*/{task_id}/{any-description}` and this action will automatically update your Notion task's property with the PR URL and comment it on all the necessary PR updates.
 
 ## Inputs
 
@@ -25,17 +25,19 @@ Create branch in format `*/{task_id}/{any-description}` and this action will aut
 ## Usage
 
 ```yml
-name: Add PR to Notion
+name: Comment PR updates
+
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited, closed, reopened, synchronize, converted_to_draft, ready_for_review, review_requested]
+
 jobs:
-  notion:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Update notion page
-        uses: kadaradam/notion-pr-link@latest
-        with:
-          notion_secret: secret_1234567890abcdef1234
-          notion_prop: PR
+    - uses: kolesnikov-pasha/github-pr-linker@v1.0.1
+      with:
+        database-id: ${{ secrets.DATABASE_ID }}
+        notion-token: ${{ secrets.NOTION_TOKEN }}
 ```
