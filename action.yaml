@@ -7,6 +7,8 @@ branding:
 inputs:
   database-id:
     description: ID of a database you want to use as a source of tasks.
+  notion-token:
+    description: API token of your Notion integration.
   task-id-param:
     description: Page parameter responsible for representing tasks IDs.
     default: ID
@@ -25,8 +27,7 @@ runs:
   - name: Run script
     env:
       EVENT_CONTEXT: ${{ toJSON(github.event) }}
-      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
     run: |
       pip install -r requirements.txt
       printf '%s\n' "$EVENT_CONTEXT" > github_event_context.json
-      python pr_linker/run_pr_analysis.py $NOTION_TOKEN ${{ inputs.database-id }} ${{ inputs.task-id-prefix }} github_event_context.json
+      python pr_linker/run_pr_analysis.py ${{ inputs.notion-token }} ${{ inputs.database-id }} ${{ inputs.task-id-prefix }} github_event_context.json

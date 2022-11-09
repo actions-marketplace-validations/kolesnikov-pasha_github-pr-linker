@@ -14,3 +14,4 @@ jobs:
     - uses: ./action.yaml
       with:
         database-id: 8ad76183848046f2bb81658f92b3a431
+        notion-token: ${{ secrets.NOTION_TOKEN }}
