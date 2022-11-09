@@ -10,18 +10,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: ls
+    - uses: ./
       with:
-        submodules: 'true'
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run script
-      env:
-        EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        DATABASE_ID: ${{ secrets.DATABASE_ID }}
-        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      run: |
-        printf '%s\n' "$EVENT_CONTEXT" > event_context.json
-        python pr_linker/run_pr_analysis.py $NOTION_TOKEN $DATABASE_ID TASKS event_context.json
+        database-id: 8ad76183848046f2bb81658f92b3a431
+        notion-token: ${{ secrets.NOTION_TOKEN }}

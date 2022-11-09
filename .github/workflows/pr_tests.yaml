@@ -1,4 +1,4 @@
-name: Comment PR opened
+name: Run unit-tests for build
 
 on:
   pull_request
