@@ -3,7 +3,7 @@ description: This GitHub Action will connect PRs you make to Notion tasks
 author: kolesnikov-pasha
 branding:
   icon: external-link
-  color: green
+  color: purple
 inputs:
   database-id:
     description: ID of a database you want to use as a source of tasks.
