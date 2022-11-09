@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: ls
-    - uses: ./action.yaml
+    - uses: kolesnikov-pasha/notion-pr-linking@latest
       with:
         database-id: 8ad76183848046f2bb81658f92b3a431
